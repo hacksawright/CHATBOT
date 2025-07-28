@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot Web</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h2>Chat với AI</h2>
+
+    <input type="text" id="question" placeholder="Nhập câu hỏi..." style="width: 300px;">
+    <button onclick="sendQuestion()">Gửi</button>
+
+    <h3>Phản hồi:</h3>
+    <div id="response" style="white-space: pre-wrap;"></div>
+
+    <script>
+    async function sendQuestion() {
+        const question = document.getElementById("question").value;
+        const responseDiv = document.getElementById("response");
+
+        try {
+            const res = await fetch("http://127.0.0.1:5000/ask", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ question })
+            });
+
+            const data = await res.json();
+            responseDiv.textContent = data.response || "Không có phản hồi!";
+        } catch (err) {
+            responseDiv.textContent = "Lỗi khi gửi yêu cầu: " + err;
+        }
+    }
+</script>
+
+</body>
+</html>
