@@ -1,5 +1,5 @@
 # db.py
-
+# Lưu câu hỏi, câu trả lời và thời gian khi chat vào mongodb
 from pymongo import MongoClient
 from datetime import datetime
 
